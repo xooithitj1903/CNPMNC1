@@ -66,9 +66,9 @@
             <img src="@Url.Content(item.ImagePro)" height="150" width="150" />
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            @Html.ActionLink("Edit", "Edit", new { id = item.idsanpham}) |
+            @Html.ActionLink("Details", "Details", new { id = item.idsanpham }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.idsanpham })
         </td>
     </tr>
 }

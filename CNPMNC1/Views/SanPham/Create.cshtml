@@ -9,7 +9,7 @@
 
 @using (Html.BeginForm("Create", "SanPham", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
-    @Html.AntiForgeryToken()
+
 <table class="table-bordered">
     <tr>
         <td>@Html.LabelFor(model => model.idsanpham) </td>
