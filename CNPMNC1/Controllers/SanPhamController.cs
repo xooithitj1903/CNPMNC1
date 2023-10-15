@@ -45,7 +45,7 @@ namespace CNPMNC1.Controllers
         public ActionResult Create(SanPham sanPham)
         {
             try
-            {
+            {   
                 if (sanPham.UploadImages != null)
                 {
                     string filename = Path.GetFileNameWithoutExtension(sanPham.UploadImages.FileName);
