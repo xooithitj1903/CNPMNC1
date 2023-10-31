@@ -17,9 +17,24 @@
             </button>
             <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
                 <ul class="navbar-nav flex-grow-1">
-                    <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("About", "About", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                    <a href="@Url.Action("Index2", "SanPham")">Đăng Nhập</a>
+                    <a href="@Url.Action("DangNhap", "DangNhapDangKy")">Đăng Nhập</a>
+                    <a href="@Url.Action("DangKy", "DangNhapDangKy")">Đăng Ký</a>
+                    <li class="">
+                        @if (Session["ID"] != null)
+                        {
+                            string idtk = Session["ID"] as string;
+                            <a href="@Url.Action("Danhsachdonhang", "NguoiDung")">ĐƠn Hàng CỦa Bạn</a>
+                            <a href="@Url.Action("Edit", "DangNhapDangKy", new {id = idtk})">Chỉnh Sữa Tài Khoản</a>
+                            <a href="@Url.Action("Dangxuat", "DangNhapDangKy")">Đăng Xuất</a>
+                        }
+                        @if (Session["Email"] != null)
+                        {
+                            <a href="@Url.Action("Index", "DangNhapDangKy")">Chỉnh Sữa Tài Khoản khách hàng</a>
+                            <a href="@Url.Action("Danhsachdonhang2", "NguoiDung")">QUản Lý ĐƠn Hàng</a>
+                            <a href="@Url.Action("Dangxuat", "DangNhapDangKy")">Đăng Xuất</a>
+                        }
+                    </li>
                 </ul>
             </div>
         </div>

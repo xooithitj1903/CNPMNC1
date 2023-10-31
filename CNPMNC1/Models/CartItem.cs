@@ -12,6 +12,8 @@ namespace CNPMNC1.Models
     }
     public class Cart
     {
+        public Nullable<decimal> giamgia { get; set; }
+        public string phuongthuctt { get; set; }
         List<CartItem> items = new List<CartItem>();
         public IEnumerable<CartItem> Items { get { return items; } }
         public void Add_Product_Cart(SanPham pro, int quan = 1)

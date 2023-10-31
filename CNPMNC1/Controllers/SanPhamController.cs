@@ -11,9 +11,12 @@ using System.Web.Mvc;
 using CNPMNC1.Models;
 using System.IO;
 using System.Data.Entity;
+using static CNPMNC1.Models.CacphuongTT;
+
 
 namespace CNPMNC1.Controllers
 {
+
     public class SanPhamController : Controller
     {
         IFirebaseConfig config = new FirebaseConfig
@@ -24,6 +27,18 @@ namespace CNPMNC1.Controllers
         IFirebaseClient client;
         // GET: SanPham
         public ActionResult Index()
+        {
+            client = new FireSharp.FirebaseClient(config);
+            FirebaseResponse response = client.Get("SanPham/");
+            dynamic data = JsonConvert.DeserializeObject<dynamic>(response.Body);
+            var list = new List<SanPham>();
+            foreach (var item in data)
+            {
+                list.Add(JsonConvert.DeserializeObject<SanPham>(((JProperty)item).Value.ToString()));
+            }
+            return View(list);
+        }
+        public ActionResult Index2()
         {
             client = new FireSharp.FirebaseClient(config);
             FirebaseResponse response = client.Get("SanPham/");
@@ -69,6 +84,7 @@ namespace CNPMNC1.Controllers
         {
             client = new FireSharp.FirebaseClient(config);
             var data = sanPham;
+            data.giamgia = 0;
             PushResponse response = client.Push("SanPham/", data);
             data.idsanpham = response.Result.name;
             SetResponse setResponse = client.Set("SanPham/" + data.idsanpham, data);
@@ -81,8 +97,6 @@ namespace CNPMNC1.Controllers
             SanPham data = JsonConvert.DeserializeObject<SanPham>(response.Body);
             return View(data);
         }
-
-
         [HttpGet]
         public ActionResult Edit(string id)
         {
@@ -100,7 +114,6 @@ namespace CNPMNC1.Controllers
             SanPham data = JsonConvert.DeserializeObject<SanPham>(response.Body);
             return RedirectToAction("Index");
         }
-
         [HttpGet]
         public ActionResult Delete(string id)
         {

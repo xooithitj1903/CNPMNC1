@@ -1,11 +1,11 @@
-﻿@model IEnumerable<CNPMNC1.Models.SanPham>
+﻿@model IEnumerable<CNPMNC1.Models.chitietdonhang>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "chitietdonhang";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<h2>chitietdonhang</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -33,11 +33,18 @@
         <th>
             @Html.DisplayNameFor(model => model.ImagePro)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.soluong)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tongtien)
+        </th>
         <th></th>
     </tr>
 
 @foreach (var item in Model) {
     <tr>
+
         <td>
             @Html.DisplayFor(modelItem => item.tensanpham)
         </td>
@@ -60,10 +67,15 @@
             <img src="@Url.Content(item.ImagePro)" height="150" width="150" />
         </td>
         <td>
-            @Html.ActionLink("Thêm Giảm Giá Vào Sản Phẩm", "Edit", new { id = item.idsanpham }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.idsanpham })
+            @Html.DisplayFor(modelItem => item.soluong)
         </td>
-    </tr>   
+        <td>
+            @Html.DisplayFor(modelItem => item.tongtien)
+        </td>
+        <td>
+            <a href="@Url.Action("Danhsachdonhang","NguoiDung")">Đơn Hàng Của bạn</a>
+        </td>
+    </tr>
 }
 
 </table>

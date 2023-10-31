@@ -1,6 +1,5 @@
-﻿@model CNPMNC1.Models.Cart
-
-@{
+﻿@model  CNPMNC1.Models.Cart
+    @{
     ViewBag.Title = "ShowCart";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -17,13 +16,16 @@
                 <th>Hình sản phẩm</th>
                 <th>GIá</th>
                 <th>Số Lượng</th>
-                <th></th>
+                <th>Giảm Giá</th>
+                <th>Thành Giá</th>
             </tr>
         </thead>
         <tbody>
             @foreach (var item in Model.Items)
             {
-                decimal total = item.quantity * (decimal)item.sanPham.gia.Value;
+                decimal total = item.quantity * (decimal)item.sanPham.gia.Value * (decimal)item.sanPham.giamgia.Value;
+                decimal total2 = item.quantity * (decimal)item.sanPham.gia.Value - (decimal)total;
+                decimal giamgia = item.sanPham.giamgia.Value * 100;
                 <tr>
                     <td>@Html.DisplayFor(model => item.sanPham.tensanpham)</td>
                     <td><img src="@Url.Content(item.sanPham.ImagePro)" height="50" width="50" /></td>
@@ -36,13 +38,20 @@
                             <input type="submit" value="Update" />
                         }
                     </td>
-                    <td>@total</td>
+                    <td>@giamgia %</td>
+                    <td>@total2</td>
                     <td>
                         <a href="@Url.Action("RemoveCart", "GioHang", new { id = item.sanPham.idsanpham })">Xoa</a>
-
                     </td>
+
                 </tr>
             }
+            <tr>
+                <td>@Html.LabelFor(model => model.phuongthuctt)</td>
+            </tr>
+        <td>
+            @Html.ActionLink("DatHang", "DatHang", new { id = Model.phuongthuctt })
+        <td>
         </tbody>
     </table>
 }

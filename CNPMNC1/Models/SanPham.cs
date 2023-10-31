@@ -23,6 +23,7 @@ namespace CNPMNC1.Models
         public string loai_sanpham { get; set; }
         public Nullable<decimal> gia { get; set; }
         public string ImagePro { get; set; }
+        public Nullable<decimal> giamgia { get; set; }
         [NotMapped]
         public HttpPostedFileBase UploadImages { get; set; }
     }

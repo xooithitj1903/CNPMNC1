@@ -46,6 +46,11 @@ namespace CNPMNC1.Controllers
 
             return View();
         }
+        public ActionResult Dangxuat()
+        {
+            Session.Clear();
+            return RedirectToAction("Index2","SanPham");
+        }
         public ActionResult DangNhap()
         {
             return View();
@@ -63,12 +68,16 @@ namespace CNPMNC1.Controllers
             }
             foreach (var items in list)
             {
-                if(items.email == taiKhoan.email && items.pass == taiKhoan.pass)
+                if ("admin@gmail.com" == taiKhoan.email && "admin123456" == taiKhoan.pass)
+                {
+                    Session["PasswordUser"] = taiKhoan.pass;
+                    Session["Email"] = "admin@gmail.com";
+                    return RedirectToAction("Index", "SanPham");
+                }
+                if (items.email == taiKhoan.email && items.pass == taiKhoan.pass)
                 {
                     Session["ID"] = items.id;
-                    Session["PasswordUser"] = items.pass;
-                    Session["Email"] = items.email;
-                    return RedirectToAction("Index", "SanPham");
+                    return RedirectToAction("Index2", "SanPham");
                 } else if(items.email == taiKhoan.email && items.pass != taiKhoan.pass)
                 {
                     ViewBag.ErrorDangNhap("Sai Mật Khẩu");
@@ -79,6 +88,52 @@ namespace CNPMNC1.Controllers
                 }
             }
             return View();
+        }
+        [HttpGet]
+        public ActionResult Edit(string id)
+        {
+            client = new FireSharp.FirebaseClient(config);
+            FirebaseResponse response = client.Get("TaiKhoan/" + id);
+            TaiKhoan data = JsonConvert.DeserializeObject<TaiKhoan>(response.Body);
+            return View(data);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(TaiKhoan taikhoan)
+        {
+            client = new FireSharp.FirebaseClient(config);
+            FirebaseResponse response = client.Set("TaiKhoan/" + taikhoan.id, taikhoan);
+            TaiKhoan data = JsonConvert.DeserializeObject<TaiKhoan>(response.Body);
+            return RedirectToAction("Index","SanPham");
+        }
+        public ActionResult Index()
+        {
+            client = new FireSharp.FirebaseClient(config);
+            FirebaseResponse response = client.Get("TaiKhoan/");
+            dynamic data = JsonConvert.DeserializeObject<dynamic>(response.Body);
+            var list = new List<TaiKhoan>();
+            foreach (var item in data)
+            {
+                list.Add(JsonConvert.DeserializeObject<TaiKhoan>(((JProperty)item).Value.ToString()));
+            }
+            return View(list);
+        }
+        [HttpGet]
+        public ActionResult Edit2(string id)
+        {
+            client = new FireSharp.FirebaseClient(config);
+            FirebaseResponse response = client.Get("TaiKhoan/" + id);
+            TaiKhoan data = JsonConvert.DeserializeObject<TaiKhoan>(response.Body);
+            return View(data);
+        }
+
+        [HttpPost]
+        public ActionResult Edit2(TaiKhoan taikhoan)
+        {
+            client = new FireSharp.FirebaseClient(config);
+            FirebaseResponse response = client.Set("TaiKhoan/" + taikhoan.id, taikhoan);
+            TaiKhoan data = JsonConvert.DeserializeObject<TaiKhoan>(response.Body);
+            return RedirectToAction("Index", "SanPham");
         }
         private void AddStudentToFirebase(TaiKhoan taikhoan)
         {

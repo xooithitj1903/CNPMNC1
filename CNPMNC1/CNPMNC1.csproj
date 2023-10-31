@@ -357,13 +357,20 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\StartUp.Auth.cs" />
     <Compile Include="Controllers\DangnhapDangkyController.cs" />
+    <Compile Include="Controllers\DanhMucController.cs" />
     <Compile Include="Controllers\GioHangController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\NguoiDungController.cs" />
     <Compile Include="Controllers\SanPhamController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\CacphuongTT.cs" />
     <Compile Include="Models\CartItem.cs" />
+    <Compile Include="Models\chitietdonhang.cs" />
+    <Compile Include="Models\danhmuc.cs" />
+    <Compile Include="Models\DanhSachDonHang.cs" />
+    <Compile Include="Models\GiamGiaThanhVien.cs" />
     <Compile Include="Models\SanPham.cs" />
     <Compile Include="Models\TaiKhoan.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -426,16 +433,29 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\SanPham\Create.cshtml" />
     <Content Include="Views\SanPham\Index.cshtml" />
-    <Content Include="Views\SanPham\Edit.cshtml" />
     <Content Include="Views\SanPham\Delete.cshtml" />
     <Content Include="Views\GioHang\ShowCart.cshtml" />
     <Content Include="Views\GioHang\BagCart.cshtml" />
     <Content Include="Views\GioHang\EmptyCart.cshtml" />
     <Content Include="Views\DangnhapDangky\Dangky.cshtml" />
     <Content Include="Views\DangnhapDangky\DangNhap.cshtml" />
+    <Content Include="Views\NguoiDung\Danhsachdonhang.cshtml" />
+    <Content Include="Views\NguoiDung\chitietdonhang.cshtml" />
+    <Content Include="Views\NguoiDung\Delete.cshtml" />
+    <Content Include="Views\SanPham\Edit.cshtml" />
+    <Content Include="Views\GioHang\ThanhToan.cshtml" />
+    <Content Include="Views\GioHang\Create.cshtml" />
+    <Content Include="Views\GioHang\Create2.cshtml" />
+    <Content Include="Views\DangnhapDangky\Edit.cshtml" />
+    <Content Include="Views\SanPham\Index2.cshtml" />
+    <Content Include="Views\DangnhapDangky\Edit2.cshtml" />
+    <Content Include="Views\DangnhapDangky\Index.cshtml" />
+    <Content Include="Views\NguoiDung\Danhsachdonhang2.cshtml" />
+    <Content Include="Views\NguoiDung\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\DanhMuc\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />

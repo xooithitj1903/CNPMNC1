@@ -1,0 +1,2 @@
+﻿@model  CNPMNC1.Models.CacphuongTT
+    @Html.DropDownListFor(model => model.ID, new SelectList(Model.Listtt.OrderBy(model => model.PhuongthucTT), "ID", "PhuongthucTT"), "--Select Cate--")

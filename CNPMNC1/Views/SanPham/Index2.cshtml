@@ -1,15 +1,12 @@
 ﻿@model IEnumerable<CNPMNC1.Models.SanPham>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Index2";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<h2>Index2</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 <table class="table">
     <tr>
         <th>
@@ -59,11 +56,8 @@
         <td>
             <img src="@Url.Content(item.ImagePro)" height="150" width="150" />
         </td>
-        <td>
-            @Html.ActionLink("Thêm Giảm Giá Vào Sản Phẩm", "Edit", new { id = item.idsanpham }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.idsanpham })
-        </td>
-    </tr>   
+        <a href="@Url.Action("AddToCart","GioHang", new {id = item.idsanpham})">Buy</a>
+    </tr>
 }
 
 </table>
