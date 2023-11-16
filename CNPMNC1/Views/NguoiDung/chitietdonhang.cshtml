@@ -6,10 +6,6 @@
 }
 
 <h2>chitietdonhang</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 <table class="table">
     <tr>
         <th>
@@ -71,9 +67,6 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.tongtien)
-        </td>
-        <td>
-            <a href="@Url.Action("Danhsachdonhang","NguoiDung")">Đơn Hàng Của bạn</a>
         </td>
     </tr>
 }

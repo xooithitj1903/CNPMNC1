@@ -9,7 +9,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using FireSharp.Config;
-using static CNPMNC1.Models.CartItem;
+using static CNPMNC1.Models.Cart;
 using static CNPMNC1.Models.CacphuongTT;
 using Newtonsoft.Json.Linq;
 using System.IO;

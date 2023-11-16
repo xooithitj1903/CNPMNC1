@@ -1,63 +1,93 @@
 ﻿@model IEnumerable<CNPMNC1.Models.SanPham>
 
 @{
-    ViewBag.Title = "Index2";
+    ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<div style="display: flex; padding: 100px 0px;">
+    <div style="width: 300px; padding-top: 10px; margin-right: 50px; box-shadow: 2px 2px #c7c4c4; border-radius: 30px; background-color: #f7f7f7;">
+        <div style="display: flex; justify-content: space-around;"><p>Samsung</p><p style="font-size: 20px;font-weight: 1000;">></p></div>
+        <div style="display: flex; justify-content: space-around;"><p>Xiaomi</p><p style="font-size: 20px;font-weight: 1000;">></p></div>
+        <div style="display: flex; justify-content: space-around;"><p>OPPO</p><p style="font-size: 20px;font-weight: 1000;">></p></div>
+        <div style="display: flex; justify-content: space-around;"><p>readmi</p><p style="font-size: 20px;font-weight: 1000;">></p></div>
+        <div style="display: flex; justify-content: space-around;"><p>vivo</p><p style="font-size: 20px;font-weight: 1000;">></p></div>
+        <div style="display: flex; justify-content: space-around;"><p>Nokia</p><p style="font-size: 20px;font-weight: 1000;">></p></div>
+        <div style="display: flex; justify-content: space-around;"><p>ASUS</p><p style="font-size: 20px;font-weight: 1000;">></p></div>
+    </div>
+    <div style="display: flex;">
+        <div>
+            <img src="~/Content/images/11.jpg" style=" width: 600px; height: 330px;" />
+        </div>
+        <div style="margin-left: 30px;">
+            <div><img src="~/Content/images/12.jpg" style=" height: 100px; margin-bottom: 15px; " /></div>
+            <div><img src="~/Content/images/13.jpg" style=" height: 100px; margin-bottom: 15px;" /></div>
+            <div><img src="~/Content/images/14.jpg" style=" height: 100px; " /></div>
+        </div>
+    </div>
+</div>
 
-<h2>Index2</h2>
-
-<table class="table">
+@using (Html.BeginForm("Index2", "SanPham", FormMethod.Get))
+{
     <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.tensanpham)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.thuonghieu)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.namsx)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.mota)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.loai_sanpham)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.gia)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ImagePro)
-        </th>
-        <th></th>
+        <div style="display: flex; margin-left: 400px; padding: 30px 0px; ">
+            <input name="name" type="text" value="" style="border: 0px; border-bottom: 0.5px solid#00000030; margin-left: 20px; width: 500px; ">
+        <td><input type="submit" value="Tìm Kiếm" style=" padding: 5px 30px; border-radius: 10px; border: 1px; background-color: #ff255b;" /></td>
+        </div>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.tensanpham)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.thuonghieu)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.namsx)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.mota)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.loai_sanpham)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.gia)
-        </td>
-        <td>
-            <img src="@Url.Content(item.ImagePro)" height="150" width="150" />
-        </td>
-        <a href="@Url.Action("AddToCart","GioHang", new {id = item.idsanpham})">Buy</a>
-    </tr>
+    <table class="table">
+        <h2 style="padding: 50px 0px;">Danh sách sản phẩm</h2>
+        <div class="container">
+            <div class="row">
+                @foreach (var pro in Model)
+                {
+                    <div class="col-sm-12 col-sm-6 col-md-4 col-lg-3" style="width: 200px; margin-bottom: 30px; padding: 0px; margin-right: 50px; padding-bottom: 10px; border-radius: 20px; box-shadow: 0 1px 2px 0 rgba(60,64,67,.1), 0 2px 6px 2px rgba(60,64,67,.15); ">
+                        <div class="card-pro">
+                            <img src="@Url.Content(pro.ImagePro)" height="150" width="150" style="border-radius: 16px; width: 200px;" />
+                            <p style="padding: 5px 20px">@Html.DisplayFor(model => pro.tensanpham)</p>
+                            <p class="price" style="padding: 5px 20px; color: red; font-weight: 700;">@Html.DisplayFor(model => pro.gia) </p>
+                            <a style="padding: 5px 20px; text-decoration: none; color: red; " href="@Url.Action("AddToCart","GioHang", new {id = pro.idsanpham})">Buy</a>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </table>
+
 }
+<div style="display: flex; flex-direction: column;">
+    <div style="display: flex; justify-content: space-between; padding: 20px 0px; ">
+        <div><img src="~/Content/images/20.jpg" style=" height: 100px; margin-bottom: 15px; width:300px;" /></div>
+        <div><img src="~/Content/images/21.jpg" style=" height: 100px; margin-bottom: 15px; width: 300px;" /></div>
+        <div><img src="~/Content/images/22.jpg" style="height: 100px; margin-bottom: 15px; width: 300px; " /></div>
+        <div><img src="~/Content/images/23.jpg" style=" height: 100px; margin-bottom: 15px; width: 300px;" /></div>
+    </div>
+    <div style="display: flex; justify-content: space-between; padding:20px 0px;">
+        <div><img src="~/Content/images/24.jpg" style=" height: 100px; margin-bottom: 15px; width: 300px; " /></div>
+        <div><img src="~/Content/images/25.jpg" style=" height: 100px; margin-bottom: 15px; width: 300px;" /></div>
+        <div><img src="~/Content/images/26.jpg" style="height: 100px; margin-bottom: 15px; width: 300px; " /></div>
+        <div><img src="~/Content/images/27.jpg" style=" height: 100px; margin-bottom: 15px; width: 300px;" /></div>
 
-</table>
+    </div>
+</div>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var priceElements = document.querySelectorAll(".price");
+
+        priceElements.forEach(function (element) {
+            var priceValue = element.textContent;
+            var formattedPrice = formatPrice(priceValue);
+            element.textContent = formattedPrice;
+        });
+
+        function formatPrice(price) {
+            // Chuyển đổi thành số nguyên
+            var integerPart = parseInt(price);
+            // Thêm dấu phẩy ngăn cách hàng ngàn
+            var formattedPrice = integerPart.toLocaleString("vi-VN");
+            // Thêm đơn vị tiền tệ
+            formattedPrice += " đ";
+            return formattedPrice;
+        }
+    });
+</script>

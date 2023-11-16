@@ -12,6 +12,8 @@ using Newtonsoft.Json;
 using System.IO;
 using System.Data.Entity;
 using Firebase.Auth;
+using System.Net;
+using System.Net.Mail;
 
 
 namespace CNPMNC1.Controllers
@@ -58,6 +60,12 @@ namespace CNPMNC1.Controllers
         [HttpPost]
         public ActionResult Dangnhap(TaiKhoan taiKhoan)
         {
+            if ("admin@gmail.com" == taiKhoan.email && "admin123456" == taiKhoan.pass)
+            {
+                Session["PasswordUser"] = taiKhoan.pass;
+                Session["Email"] = "admin@gmail.com";
+                return RedirectToAction("Index", "SanPham");
+            }
             client = new FireSharp.FirebaseClient(config);
             FirebaseResponse response = client.Get("TaiKhoan/");
             dynamic data = JsonConvert.DeserializeObject<dynamic>(response.Body);
@@ -68,23 +76,10 @@ namespace CNPMNC1.Controllers
             }
             foreach (var items in list)
             {
-                if ("admin@gmail.com" == taiKhoan.email && "admin123456" == taiKhoan.pass)
-                {
-                    Session["PasswordUser"] = taiKhoan.pass;
-                    Session["Email"] = "admin@gmail.com";
-                    return RedirectToAction("Index", "SanPham");
-                }
                 if (items.email == taiKhoan.email && items.pass == taiKhoan.pass)
                 {
                     Session["ID"] = items.id;
                     return RedirectToAction("Index2", "SanPham");
-                } else if(items.email == taiKhoan.email && items.pass != taiKhoan.pass)
-                {
-                    ViewBag.ErrorDangNhap("Sai Mật Khẩu");
-                }
-                else if (items.email != taiKhoan.email)
-                {
-                    ViewBag.ErrorDangNhap("Tài Khoản không tồn tại");
                 }
             }
             return View();
@@ -117,6 +112,13 @@ namespace CNPMNC1.Controllers
                 list.Add(JsonConvert.DeserializeObject<TaiKhoan>(((JProperty)item).Value.ToString()));
             }
             return View(list);
+        }
+        public ActionResult Index2(string id)
+        {
+            client = new FireSharp.FirebaseClient(config);
+            FirebaseResponse response = client.Get("TaiKhoan/" + id);
+            TaiKhoan data = JsonConvert.DeserializeObject<TaiKhoan>(response.Body);
+            return View(data);
         }
         [HttpGet]
         public ActionResult Edit2(string id)

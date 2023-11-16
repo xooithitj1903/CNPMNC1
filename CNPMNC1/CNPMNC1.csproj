@@ -366,7 +366,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\CacphuongTT.cs" />
-    <Compile Include="Models\CartItem.cs" />
+    <Compile Include="Models\Cart.cs" />
     <Compile Include="Models\chitietdonhang.cs" />
     <Compile Include="Models\danhmuc.cs" />
     <Compile Include="Models\DanhSachDonHang.cs" />
@@ -395,6 +395,29 @@
     <Content Include="Content\bootstrap.rtl.min.css" />
     <Content Include="Content\home.css" />
     <Content Include="Content\images\1.jpg" />
+    <Content Include="Content\images\10.jpg" />
+    <Content Include="Content\images\11.jpg" />
+    <Content Include="Content\images\12.jpg" />
+    <Content Include="Content\images\13.jpg" />
+    <Content Include="Content\images\14.jpg" />
+    <Content Include="Content\images\2.jpg" />
+    <Content Include="Content\images\20.jpg" />
+    <Content Include="Content\images\21.jpg" />
+    <Content Include="Content\images\22.jpg" />
+    <Content Include="Content\images\23.jpg" />
+    <Content Include="Content\images\24.jpg" />
+    <Content Include="Content\images\25.jpg" />
+    <Content Include="Content\images\26.jpg" />
+    <Content Include="Content\images\27.jpg" />
+    <Content Include="Content\images\3.jpg" />
+    <Content Include="Content\images\4.jpg" />
+    <Content Include="Content\images\5.jpg" />
+    <Content Include="Content\images\6.jpg" />
+    <Content Include="Content\images\7.jpg" />
+    <Content Include="Content\images\8.jpg" />
+    <Content Include="Content\images\9.jpg" />
+    <Content Include="Content\images\img.jpg" />
+    <Content Include="Content\images\user.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -431,7 +454,6 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\SanPham\Create.cshtml" />
     <Content Include="Views\SanPham\Index.cshtml" />
     <Content Include="Views\SanPham\Delete.cshtml" />
     <Content Include="Views\GioHang\ShowCart.cshtml" />
@@ -449,9 +471,15 @@
     <Content Include="Views\DangnhapDangky\Edit.cshtml" />
     <Content Include="Views\SanPham\Index2.cshtml" />
     <Content Include="Views\DangnhapDangky\Edit2.cshtml" />
-    <Content Include="Views\DangnhapDangky\Index.cshtml" />
     <Content Include="Views\NguoiDung\Danhsachdonhang2.cshtml" />
     <Content Include="Views\NguoiDung\Edit.cshtml" />
+    <Content Include="Views\DangnhapDangky\Index2.cshtml" />
+    <Content Include="Views\DangnhapDangky\Index.cshtml" />
+    <Content Include="Views\NguoiDung\loctheotaikhoan.cshtml" />
+    <Content Include="Views\NguoiDung\Danhsachloctheonguoidung.cshtml" />
+    <Content Include="Views\NguoiDung\Loctheongay.cshtml" />
+    <Content Include="Views\NguoiDung\Danhsachloctheotinhtrang.cshtml" />
+    <Content Include="Views\SanPham\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

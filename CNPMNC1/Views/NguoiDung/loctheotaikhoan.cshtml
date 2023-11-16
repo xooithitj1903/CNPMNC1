@@ -1,11 +1,12 @@
 ﻿@model IEnumerable<CNPMNC1.Models.TaiKhoan>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "loctheotaikhoan";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Tài Khoản Khách Hàng</h2>
+<h2>loctheotaikhoan</h2>
+
 <table class="table">
     <tr>
         <th>
@@ -50,7 +51,7 @@
             @Html.DisplayFor(modelItem => item.name)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit2", new { id=item.id }) |
+            @Html.ActionLink("Danh Sách ĐƠn Hàng Của tài Khoản", "Danhsachloctheonguoidung", new {id = item.id}  )
         </td>
     </tr>
 }

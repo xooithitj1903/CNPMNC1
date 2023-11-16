@@ -1,62 +1,89 @@
 ﻿@model  CNPMNC1.Models.Cart
-    @{
+@{
     ViewBag.Title = "ShowCart";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-
-<h2>Giở hàng</h2>
-<a href="@Url.Action("Index","SanPham")">TIếp tục mua hàng</a>
+<h2 style="text-align: center; padding: 30px 0px; ">Giỏ Hàng Của Bạn</h2>
+<a style=" color: red; text-decoration: none; padding: 1px 0px; margin-left: 578px;" href="@Url.Action("Index2","SanPham")">TIếp tục mua hàng</a>
 @if (Model != null)
 {
     <table class="table">
-        <thead>
-            <tr>
-                <th>Tên Sản Phẩm</th>
-                <th>Hình sản phẩm</th>
-                <th>GIá</th>
-                <th>Số Lượng</th>
-                <th>Giảm Giá</th>
-                <th>Thành Giá</th>
-            </tr>
-        </thead>
         <tbody>
             @foreach (var item in Model.Items)
             {
                 decimal total = item.quantity * (decimal)item.sanPham.gia.Value * (decimal)item.sanPham.giamgia.Value;
                 decimal total2 = item.quantity * (decimal)item.sanPham.gia.Value - (decimal)total;
                 decimal giamgia = item.sanPham.giamgia.Value * 100;
-                <tr>
-                    <td>@Html.DisplayFor(model => item.sanPham.tensanpham)</td>
-                    <td><img src="@Url.Content(item.sanPham.ImagePro)" height="50" width="50" /></td>
-                    <td>@Html.DisplayFor(model => item.sanPham.gia)</td>
-                    <td>
-                        @using (Html.BeginForm("update_cart_quantity", "GioHang"))
-                        {
-                            <input type="hidden" value="@item.sanPham.idsanpham" name="ID" />
-                            <input type="number" value="@item.quantity" name="carquantity" />
-                            <input type="submit" value="Update" />
-                        }
-                    </td>
-                    <td>@giamgia %</td>
-                    <td>@total2</td>
-                    <td>
-                        <a href="@Url.Action("RemoveCart", "GioHang", new { id = item.sanPham.idsanpham })">Xoa</a>
-                    </td>
-
-                </tr>
+                <div style="margin-left: 300px; margin-top: 20px; width: 652px; padding: 57px; border: 1px solid #e9e9e9; border-radius: 25px; box-shadow: 3px 3px #c7c4c4; margin-bottom: 20px; ">
+                    <div style="display: flex; justify-content: space-between;">
+                        <img src="@Url.Content(item.sanPham.ImagePro)" height="50" width="50" />
+                        <div>
+                            <p>@Html.DisplayFor(model => item.sanPham.tensanpham)</p>
+                            <p class="price">@Html.DisplayFor(model => item.sanPham.gia)</p>
+                        </div>
+                        <div>
+                            <a style="color: red; text-decoration: none; padding-left: 86px;" href="@Url.Action("RemoveCart","GioHang", new {id = item.sanPham.idsanpham})">Xoa</a>
+                            <p style="padding-left: 17px;">
+                                @using (Html.BeginForm("update_cart_quantity", "GioHang"))
+                                {
+                                    <input type="hidden" value="@item.sanPham.idsanpham" name="ID" style="border: 0px; width: 35px;" />
+                                    <input type="number" value="@item.quantity" name="carquantity" style="border: 0px; width: 35px;" required min="1" />
+                                    <input type="submit" value="Update" style="color: red; background-color: white; border: 0px;" />
+                                }
+                            </p>
+                        </div>
+                    </div>
+                    <p>@Html.DisplayFor(model => item.sanPham.mota)</p>
+                    <div>
+                    </div>
+                </div>
             }
-            <tr>
-                <td>@Html.LabelFor(model => model.phuongthuctt)</td>
-            </tr>
-        <td>
-            @Html.ActionLink("DatHang", "DatHang", new { id = Model.phuongthuctt })
-        <td>
+            @{
+                decimal totalall = 0;
+            }
+            @foreach (var item in Model.Items)
+            {
+                decimal total = item.quantity * (decimal)item.sanPham.gia.Value;
+                totalall = totalall + total;
+            }
+            <div style=" display: flex; justify-content: space-between;">
+                <div style="display: flex; margin-top: 200px;">
+                    <p style="margin-right: 15px;">Tổng Tiền</p>
+                    <p class="price">@totalall giá này đã được áp dụng khuyến mãi</p>
+                </div>
+                <div style="margin-top: 200px;">
+                    <a href="@Url.Action("DatHang","GioHang")" style=" color: red; font-size: 20px;">Đặt Hàng</a>
+                </div>
+            </div>
+
+
         </tbody>
+
     </table>
 }
 else
 {
     @Html.Partial("EmptyCart")
 }
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var priceElements = document.querySelectorAll(".price");
 
+        priceElements.forEach(function (element) {
+            var priceValue = element.textContent;
+            var formattedPrice = formatPrice(priceValue);
+            element.textContent = formattedPrice;
+        });
+
+        function formatPrice(price) {
+            // Chuyển đổi thành số nguyên
+            var integerPart = parseInt(price);
+            // Thêm dấu phẩy ngăn cách hàng ngàn
+            var formattedPrice = integerPart.toLocaleString("vi-VN");
+            // Thêm đơn vị tiền tệ
+            formattedPrice += " đ";
+            return formattedPrice;
+        }
+    });
+</script>

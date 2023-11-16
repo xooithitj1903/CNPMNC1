@@ -1,12 +1,11 @@
 ﻿@model IEnumerable<CNPMNC1.Models.DanhSachDonHang>
 
 @{
-    ViewBag.Title = "Danhsachdonhang";
+    ViewBag.Title = "Loctheongay";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Danhsachdonhang</h2>
-
+<h2>Loctheongay</h2>
 
 <table class="table">
     <tr>
@@ -28,6 +27,7 @@
 
 @foreach (var item in Model) {
     <tr>
+
         <td>
             @Html.DisplayFor(modelItem => item.Tinhtrang)
         </td>
@@ -41,8 +41,9 @@
             @Html.DisplayFor(modelItem => item.phuongthuctt)
         </td>
         <td>
-            <a href="@Url.Action("chitietdonhang","NguoiDung",new {id = item.ID})">Chi Tiết Đơn Hàng</a>
-            <a>@Html.ActionLink("Hủy ĐƠn", "Delete", new { id = item.ID })</a> 
+            @Html.ActionLink("CHỉnh Sửa Đơn Hàng", "Edit", new { id = item.ID }) |
+            @Html.ActionLink("chitietdonhang", "chitietdonhang", new { id = item.ID }) |
+            @Html.ActionLink("Xóa ĐƠn Hàng", "Delete2", new { id = item.ID })
         </td>
     </tr>
 }

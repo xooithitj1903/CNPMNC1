@@ -10,41 +10,38 @@
 <body>
     <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark">
         <div class="container">
-            @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            @Html.ActionLink("MobileShop", "Index2", "SanPham", new { area = "" }, new { @class = "navbar-brand" })
             <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="Toggle navigation" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
-                <ul class="navbar-nav flex-grow-1">
-                    <a href="@Url.Action("Index2", "SanPham")">Đăng Nhập</a>
-                    <a href="@Url.Action("DangNhap", "DangNhapDangKy")">Đăng Nhập</a>
-                    <a href="@Url.Action("DangKy", "DangNhapDangKy")">Đăng Ký</a>
-                    <li class="">
+                <ul class="navbar-nav flex-grow-1" style="display: flex; justify-content: right;">
+                    <li><span style="margin:0px;"><a style="text-decoration: none;" href="@Url.Action("ShowCart","ShoppingCart")"><img src="~/Content/images/user.jpg" style="height: 30px; width: 30px; margin-top: 10px; border-radius: 50%;" />@Html.Action("BagCart", "GioHang")</a></span></li>
+                    <div style="margin-top: 10px;">
                         @if (Session["ID"] != null)
                         {
                             string idtk = Session["ID"] as string;
-                            <a href="@Url.Action("Danhsachdonhang", "NguoiDung")">ĐƠn Hàng CỦa Bạn</a>
-                            <a href="@Url.Action("Edit", "DangNhapDangKy", new {id = idtk})">Chỉnh Sữa Tài Khoản</a>
-                            <a href="@Url.Action("Dangxuat", "DangNhapDangKy")">Đăng Xuất</a>
+                            <a style="padding: 0px 20px; color: white; text-decoration: none; margin-top: 10px;" href="@Url.Action("Danhsachdonhang", "NguoiDung")">ĐƠn Hàng CỦa Bạn</a>
+                            <a style="padding: 0px 20px; color: white; text-decoration: none; margin-top: 10px;" href="@Url.Action("Index2", "DangNhapDangKy", new {id = idtk})">Tài Khoản của bạn</a>
+                            <a style="padding: 0px 20px; color: white; text-decoration: none; margin-top: 10px;" href="@Url.Action("Dangxuat", "DangNhapDangKy")">Đăng Xuất</a>
                         }
                         @if (Session["Email"] != null)
                         {
-                            <a href="@Url.Action("Index", "DangNhapDangKy")">Chỉnh Sữa Tài Khoản khách hàng</a>
-                            <a href="@Url.Action("Danhsachdonhang2", "NguoiDung")">QUản Lý ĐƠn Hàng</a>
-                            <a href="@Url.Action("Dangxuat", "DangNhapDangKy")">Đăng Xuất</a>
+                            <a style="padding: 0px 20px; color: white; text-decoration: none; margin-top: 10px;" href="@Url.Action("Create", "SanPham")">Thêm Sản Phẩm</a>
+                            <a style="padding: 0px 20px; color: white; text-decoration: none; margin-top: 10px;" href="@Url.Action("Index", "DangNhapDangKy")">Chỉnh Sữa Tài Khoản khách hàng</a>
+                            <a style="padding: 0px 20px; color: white; text-decoration: none; margin-top: 10px;" href="@Url.Action("Danhsachdonhang2", "NguoiDung")">QUản Lý Đơn Hàng</a>
+                            <a style="padding: 0px 20px; color: white; text-decoration: none; margin-top: 10px;" href="@Url.Action("Dangxuat", "DangNhapDangKy")">Đăng Xuất</a>
                         }
-                    </li>
+                        <a style="padding: 0px 20px; color: white; text-decoration: none; margin-top: 10px;" href="@Url.Action("DangNhap", "DangNhapDangKy")">Đăng Nhập</a>
+                        <a style="padding: 0px 20px; color: white; text-decoration: none; margin-top: 10px;" href="@Url.Action("DangKy", "DangNhapDangKy")">Đăng Ký</a>
+                    </div>
                 </ul>
             </div>
         </div>
     </nav>
     <div class="container body-content">
         @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
     </div>
 
     @Scripts.Render("~/bundles/jquery")

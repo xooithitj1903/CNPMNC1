@@ -38,17 +38,41 @@ namespace CNPMNC1.Controllers
             }
             return View(list);
         }
-        public ActionResult Index2()
+        public ActionResult Index2(string name)
         {
-            client = new FireSharp.FirebaseClient(config);
-            FirebaseResponse response = client.Get("SanPham/");
-            dynamic data = JsonConvert.DeserializeObject<dynamic>(response.Body);
-            var list = new List<SanPham>();
-            foreach (var item in data)
+            if(name == null)
             {
-                list.Add(JsonConvert.DeserializeObject<SanPham>(((JProperty)item).Value.ToString()));
+                client = new FireSharp.FirebaseClient(config);
+                FirebaseResponse response = client.Get("SanPham/");
+                dynamic data = JsonConvert.DeserializeObject<dynamic>(response.Body);
+                var list = new List<SanPham>();
+                foreach (var item in data)
+                {
+                    list.Add(JsonConvert.DeserializeObject<SanPham>(((JProperty)item).Value.ToString()));
+                }
+                return View(list);
             }
-            return View(list);
+            else
+            {
+                client = new FireSharp.FirebaseClient(config);
+                FirebaseResponse response = client.Get("SanPham/");
+                dynamic data = JsonConvert.DeserializeObject<dynamic>(response.Body);
+                var list = new List<SanPham>();
+                var list2 = new List<SanPham>();
+                foreach (var item in data)
+                {
+                    list.Add(JsonConvert.DeserializeObject<SanPham>(((JProperty)item).Value.ToString()));
+                }
+                foreach (var item in list)
+                {
+                    if(item.tensanpham == name)
+                    {
+                        list2.Add(item);
+                    }
+                }
+                return View(list2);
+            }
+
         }
         [HttpGet]
         public ActionResult Create()
