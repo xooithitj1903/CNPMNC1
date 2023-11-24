@@ -10,10 +10,6 @@ using System.Web;
 using System.Web.Mvc;
 using CNPMNC1.Models;
 using System.IO;
-using System.Data.Entity;
-using static CNPMNC1.Models.CacphuongTT;
-
-
 namespace CNPMNC1.Controllers
 {
 
@@ -40,41 +36,24 @@ namespace CNPMNC1.Controllers
         }
         public ActionResult Index2(string name)
         {
-            if(name == null)
+            client = new FireSharp.FirebaseClient(config);
+            FirebaseResponse response = client.Get("SanPham/");
+            dynamic data = JsonConvert.DeserializeObject<dynamic>(response.Body);
+            var allProducts = new List<SanPham>();
+
+            foreach (var item in data)
             {
-                client = new FireSharp.FirebaseClient(config);
-                FirebaseResponse response = client.Get("SanPham/");
-                dynamic data = JsonConvert.DeserializeObject<dynamic>(response.Body);
-                var list = new List<SanPham>();
-                foreach (var item in data)
-                {
-                    list.Add(JsonConvert.DeserializeObject<SanPham>(((JProperty)item).Value.ToString()));
-                }
-                return View(list);
-            }
-            else
-            {
-                client = new FireSharp.FirebaseClient(config);
-                FirebaseResponse response = client.Get("SanPham/");
-                dynamic data = JsonConvert.DeserializeObject<dynamic>(response.Body);
-                var list = new List<SanPham>();
-                var list2 = new List<SanPham>();
-                foreach (var item in data)
-                {
-                    list.Add(JsonConvert.DeserializeObject<SanPham>(((JProperty)item).Value.ToString()));
-                }
-                foreach (var item in list)
-                {
-                    if(item.tensanpham == name)
-                    {
-                        list2.Add(item);
-                    }
-                }
-                return View(list2);
+                allProducts.Add(JsonConvert.DeserializeObject<SanPham>(((JProperty)item).Value.ToString()));
             }
 
+            if (name != null)
+            {
+                var filteredProducts = allProducts.Where(product => product.tensanpham.Contains(name)).ToList();
+                return View(filteredProducts);
+            }
+
+            return View(allProducts);
         }
-        [HttpGet]
         public ActionResult Create()
         {
             SanPham product = new SanPham();
@@ -85,13 +64,13 @@ namespace CNPMNC1.Controllers
         {
             try
             {   
-                if (sanPham.UploadImages != null)
+                if (sanPham.UploadImage != null)
                 {
-                    string filename = Path.GetFileNameWithoutExtension(sanPham.UploadImages.FileName);
-                    String exten = Path.GetExtension(sanPham.UploadImages.FileName);
-                    filename = filename = exten;
+                    string filename = Path.GetFileNameWithoutExtension(sanPham.UploadImage.FileName);
+                    String exten = Path.GetExtension(sanPham.UploadImage.FileName);
+                    filename = filename + exten;
                     sanPham.ImagePro = "~/Content/images/" + filename;
-                    sanPham.UploadImages.SaveAs(Path.Combine(Server.MapPath("~/Content/images/"), filename));
+                    sanPham.UploadImage.SaveAs(Path.Combine(Server.MapPath("~/Content/images/"), filename));
                 }
                 AddStudentToFirebase(sanPham);
                 return RedirectToAction("Index");

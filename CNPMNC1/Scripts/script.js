@@ -1,9 +1,8 @@
-﻿function Changelmage(Up10adImage, previewlmg) {
-    if (Uploadlmage.files && Uploadlmage.files[ø]) {
+﻿function Changelmage(Uploadlmage, previewImg) {
+    if (Uploadlmage.files && Uploadlmage.files[0]) {
         var reader = new FileReader();
         reader.onload = function (e) {
-            $(previewlmg).attr(' src ',
-                e.target.result);
+            $(previewImg).attr('src', e.target.result);
             reader.readAsDataURL(Uploadlmage.files[0]);
         }
     }

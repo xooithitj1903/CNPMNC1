@@ -44,20 +44,31 @@
             }
             @foreach (var item in Model.Items)
             {
-                decimal total = item.quantity * (decimal)item.sanPham.gia.Value;
-                totalall = totalall + total;
+                decimal total = item.quantity * (decimal)item.sanPham.gia.Value * (decimal)item.sanPham.giamgia.Value;
+                decimal total2 = item.quantity * (decimal)item.sanPham.gia.Value - (decimal)total;
+                totalall = totalall + total2;
             }
             <div style=" display: flex; justify-content: space-between;">
                 <div style="display: flex; margin-top: 200px;">
                     <p style="margin-right: 15px;">Tổng Tiền</p>
                     <p class="price">@totalall giá này đã được áp dụng khuyến mãi</p>
                 </div>
+                <form id="orderForm" method="post" action="@Url.Action("DatHang","GioHang")">
+                    <!-- Các phần khác của form -->
+                    <div class="form-group" style="display:flex;">
+                        <div><p style="width:200px">Phương Thức Thanh Toán</p></div>
+                        <div class="col-md-10">
+                            <select id="phuongthuctt" name="phuongthuctt" style="border: 0px; border-bottom: 0.5px solid #00000030; margin-left: 20px; width: 500px;">
+                                <option value="ThanhToanKhiNhanHang">Thanh Toán Khi Nhận Hàng</option>
+                                <option value="ThanhToanBangNganHang">Thanh Toàn Bằng Ngân Hàng</option>
+                            </select>
+                        </div>
+                    </div>
+                </form>
                 <div style="margin-top: 200px;">
                     <a href="@Url.Action("DatHang","GioHang")" style=" color: red; font-size: 20px;">Đặt Hàng</a>
                 </div>
             </div>
-
-
         </tbody>
 
     </table>

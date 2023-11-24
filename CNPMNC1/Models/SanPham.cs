@@ -25,6 +25,6 @@ namespace CNPMNC1.Models
         public string ImagePro { get; set; }
         public Nullable<decimal> giamgia { get; set; }
         [NotMapped]
-        public HttpPostedFileBase UploadImages { get; set; }
+        public HttpPostedFileBase UploadImage { get; set; }
     }
 }

@@ -3,8 +3,11 @@
 @{
     ViewBag.Title = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    <script src="~/Scripts/script.js"></script>
 }
-<h2 style="text-align: center;">Thêm mới sản phẩm</h2>
+
+<h2>Create</h2>
+
 @using (Html.BeginForm("Create", "SanPham", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     <table>
@@ -55,19 +58,17 @@
                 <div>
                     <p>Hình Ảnh Sản Phẩm</p>
                     <p>
-                        <img src="@Url.Content(Model.ImagePro)" height="150" width="150" id="previewimg" />
+                        <img src="@Url.Content(Model.ImagePro)" height="150" width="150" id="previewImg" />
                     </p>
                 </div>
                 <div>
                     <p>
-                        <input type="file" name="UploadImages" onchange="ChangeImage(this, document.getElementById('previewimg'))" />
+                        <input type="file" name="Uploadlmage" onchange="ChangeImage(this, document.getElementById('previewImg'))" />
                     <p><input type="submit" value="Tạo Sản Phẩm" style=" padding: 5px 30px; border-radius: 10px; border: 1px; background-color: #ff255b;" /></p>
-                    </p>
                 </div>
             </div>
         </tr>
     </table>
+
 }
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+<script src="~/Scripts/script.js"></script>

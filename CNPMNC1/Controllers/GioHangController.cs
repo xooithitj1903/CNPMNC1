@@ -10,11 +10,12 @@ using System.Web;
 using System.Web.Mvc;
 using FireSharp.Config;
 using static CNPMNC1.Models.Cart;
-using static CNPMNC1.Models.CacphuongTT;
 using Newtonsoft.Json.Linq;
 using System.IO;
 using System.Threading.Tasks;
 using FireSharp;
+using System.IO;
+
 
 namespace CNPMNC1.Controllers
 {
@@ -42,31 +43,8 @@ namespace CNPMNC1.Controllers
         [HttpGet]
         public ActionResult Create()
         {
-            CacphuongTT  product = new CacphuongTT();
+            GiamGiaThanhVien product = new GiamGiaThanhVien();
             return View(product);
-        }
-        [HttpPost]
-        public ActionResult Create(CacphuongTT thanhtoan)
-        {
-            try
-            {
-                AddStudentToFirebase(thanhtoan);
-                return RedirectToAction("Index");
-            }
-            catch (Exception ex)
-            {
-                ModelState.AddModelError(string.Empty, ex.Message);
-            }
-
-            return View();
-        }
-        private void AddStudentToFirebase(CacphuongTT Thanhtoan)
-        {
-            client = new FireSharp.FirebaseClient(config);
-            var data = Thanhtoan;
-            PushResponse response = client.Push("ThanhToan/", data);
-            data.idtt = response.Result.name;
-            SetResponse setResponse = client.Set("ThanhToan/" + data.idtt, data);
         }
         public Cart GetCart()
         {
@@ -116,6 +94,7 @@ namespace CNPMNC1.Controllers
         {
             Cart cart = Session["Cart"] as Cart;
             DanhSachDonHang danhsach = new DanhSachDonHang();
+            DoanhThu danhthu = new DoanhThu();
             danhsach.ngaydathang = DateTime.Now;
             danhsach.phuongthuctt = tt;
             danhsach.IDkhachhang = Session["ID"] as string;
@@ -125,8 +104,11 @@ namespace CNPMNC1.Controllers
             {
                  tien += (item.sanPham.gia * item.quantity);
             }
+            danhthu.idkh = Session["ID"] as string;
+            danhthu.ngaythanhtoan = DateTime.Now;
             danhsach.tongtien = tien;
             AddStudentToFirebase(danhsach);
+            Nullable<decimal> tongtien1 = 0;
             foreach (var item in cart.Items)
             {
                 chitietdonhang chitiet = new chitietdonhang();
@@ -141,11 +123,27 @@ namespace CNPMNC1.Controllers
                 chitiet.gia = item.sanPham.gia;
                 chitiet.mota = item.sanPham.mota;
                 chitiet.thuonghieu = item.sanPham.thuonghieu;
+                tongtien1 += chitiet.tongtien;
                 AddStudentToFirebase(chitiet);
             }
+            danhthu.tongtien = tongtien1;
+            AddStudentToFirebase(danhthu);
             cart.ClearCart();
-            return RedirectToAction("Index","SanPham");
+            return RedirectToAction("Index2","SanPham");
         }
+        public ActionResult DoanhThu()
+        {
+            client = new FireSharp.FirebaseClient(config);
+            FirebaseResponse response = client.Get("DoanhThu/");
+            dynamic data = JsonConvert.DeserializeObject<dynamic>(response.Body);
+            var list = new List<DoanhThu>();
+            foreach (var item in data)
+            {
+                list.Add(JsonConvert.DeserializeObject<DoanhThu>(((JProperty)item).Value.ToString()));
+            }
+            return View(list);
+        }
+
         private void AddStudentToFirebase(DanhSachDonHang Thanhtoan)
         {
             client = new FireSharp.FirebaseClient(config);
@@ -153,6 +151,14 @@ namespace CNPMNC1.Controllers
             PushResponse response = client.Push("DanhSachDonHang/", data);
             data.ID = response.Result.name;
             SetResponse setResponse = client.Set("DanhSachDonHang/" + data.ID, data);
+        }
+        private void AddStudentToFirebase(DoanhThu danhthu)
+        {
+            client = new FireSharp.FirebaseClient(config);
+            var data = danhthu;
+            PushResponse response = client.Push("DoanhThu/", data);
+            data.ID = response.Result.name;
+            SetResponse setResponse = client.Set("DoanhThu/" + data.ID, data);
         }
         private void AddStudentToFirebase(chitietdonhang Thanhtoan)
         {

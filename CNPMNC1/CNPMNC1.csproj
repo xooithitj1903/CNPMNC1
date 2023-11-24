@@ -357,7 +357,6 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\StartUp.Auth.cs" />
     <Compile Include="Controllers\DangnhapDangkyController.cs" />
-    <Compile Include="Controllers\DanhMucController.cs" />
     <Compile Include="Controllers\GioHangController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\NguoiDungController.cs" />
@@ -365,11 +364,10 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\CacphuongTT.cs" />
     <Compile Include="Models\Cart.cs" />
     <Compile Include="Models\chitietdonhang.cs" />
-    <Compile Include="Models\danhmuc.cs" />
     <Compile Include="Models\DanhSachDonHang.cs" />
+    <Compile Include="Models\DoanhThu.cs" />
     <Compile Include="Models\GiamGiaThanhVien.cs" />
     <Compile Include="Models\SanPham.cs" />
     <Compile Include="Models\TaiKhoan.cs" />
@@ -400,6 +398,8 @@
     <Content Include="Content\images\12.jpg" />
     <Content Include="Content\images\13.jpg" />
     <Content Include="Content\images\14.jpg" />
+    <Content Include="Content\images\15.jpg" />
+    <Content Include="Content\images\16.jpg" />
     <Content Include="Content\images\2.jpg" />
     <Content Include="Content\images\20.jpg" />
     <Content Include="Content\images\21.jpg" />
@@ -465,9 +465,6 @@
     <Content Include="Views\NguoiDung\chitietdonhang.cshtml" />
     <Content Include="Views\NguoiDung\Delete.cshtml" />
     <Content Include="Views\SanPham\Edit.cshtml" />
-    <Content Include="Views\GioHang\ThanhToan.cshtml" />
-    <Content Include="Views\GioHang\Create.cshtml" />
-    <Content Include="Views\GioHang\Create2.cshtml" />
     <Content Include="Views\DangnhapDangky\Edit.cshtml" />
     <Content Include="Views\SanPham\Index2.cshtml" />
     <Content Include="Views\DangnhapDangky\Edit2.cshtml" />
@@ -479,6 +476,8 @@
     <Content Include="Views\NguoiDung\Danhsachloctheonguoidung.cshtml" />
     <Content Include="Views\NguoiDung\Loctheongay.cshtml" />
     <Content Include="Views\NguoiDung\Danhsachloctheotinhtrang.cshtml" />
+    <Content Include="Views\GioHang\DoanhThu.cshtml" />
+    <Content Include="Views\GioHang\Create2.cshtml" />
     <Content Include="Views\SanPham\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>

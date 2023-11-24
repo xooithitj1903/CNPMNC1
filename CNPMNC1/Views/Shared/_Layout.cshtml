@@ -3,6 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="~/Scripts/script.js"></script>
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
@@ -17,7 +18,7 @@
             </button>
             <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
                 <ul class="navbar-nav flex-grow-1" style="display: flex; justify-content: right;">
-                    <li><span style="margin:0px;"><a style="text-decoration: none;" href="@Url.Action("ShowCart","ShoppingCart")"><img src="~/Content/images/user.jpg" style="height: 30px; width: 30px; margin-top: 10px; border-radius: 50%;" />@Html.Action("BagCart", "GioHang")</a></span></li>
+                    <li><span style="margin:0px;"><a style="text-decoration: none;" href="@Url.Action("ShowCart","GioHang")"><img src="~/Content/images/user.jpg" style="height: 30px; width: 30px; margin-top: 10px; border-radius: 50%;" />@Html.Action("BagCart", "GioHang")</a></span></li>
                     <div style="margin-top: 10px;">
                         @if (Session["ID"] != null)
                         {
@@ -28,9 +29,11 @@
                         }
                         @if (Session["Email"] != null)
                         {
+                            <a style="padding: 0px 20px; color: white; text-decoration: none; margin-top: 10px;" href="@Url.Action("Index", "SanPham")">Sản Phẩm</a>
+                            <a style="padding: 0px 20px; color: white; text-decoration: none; margin-top: 10px;" href="@Url.Action("DoanhThu", "GioHang")">Doanh Thu</a>
                             <a style="padding: 0px 20px; color: white; text-decoration: none; margin-top: 10px;" href="@Url.Action("Create", "SanPham")">Thêm Sản Phẩm</a>
-                            <a style="padding: 0px 20px; color: white; text-decoration: none; margin-top: 10px;" href="@Url.Action("Index", "DangNhapDangKy")">Chỉnh Sữa Tài Khoản khách hàng</a>
-                            <a style="padding: 0px 20px; color: white; text-decoration: none; margin-top: 10px;" href="@Url.Action("Danhsachdonhang2", "NguoiDung")">QUản Lý Đơn Hàng</a>
+                            <a style="padding: 0px 20px; color: white; text-decoration: none; margin-top: 10px;" href="@Url.Action("Index", "DangNhapDangKy")">Tài Khoản khách hàng</a>
+                            <a style="padding: 0px 20px; color: white; text-decoration: none; margin-top: 10px;" href="@Url.Action("Danhsachdonhang2", "NguoiDung")">Quản Lý Đơn Hàng</a>
                             <a style="padding: 0px 20px; color: white; text-decoration: none; margin-top: 10px;" href="@Url.Action("Dangxuat", "DangNhapDangKy")">Đăng Xuất</a>
                         }
                         <a style="padding: 0px 20px; color: white; text-decoration: none; margin-top: 10px;" href="@Url.Action("DangNhap", "DangNhapDangKy")">Đăng Nhập</a>
@@ -47,5 +50,7 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+    <script src="~/Scripts/script.js"></script>
+
 </body>
 </html>

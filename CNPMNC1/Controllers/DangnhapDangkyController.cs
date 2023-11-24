@@ -99,7 +99,7 @@ namespace CNPMNC1.Controllers
             client = new FireSharp.FirebaseClient(config);
             FirebaseResponse response = client.Set("TaiKhoan/" + taikhoan.id, taikhoan);
             TaiKhoan data = JsonConvert.DeserializeObject<TaiKhoan>(response.Body);
-            return RedirectToAction("Index","SanPham");
+            return RedirectToAction("Index2","SanPham");
         }
         public ActionResult Index()
         {

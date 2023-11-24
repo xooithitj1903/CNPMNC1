@@ -26,21 +26,21 @@
             <div>
                 <tr>
                     <div style="display: flex; margin-left: 400px; padding: 30px 0px; ">
-                        <p style=" margin: 0px;">Nhập Tên Tài Khoản: </p>
+                        <p style=" margin: 0px;">Nhập Email Tài Khoản: </p>
                         <input id="email" name="email" type="text" value="" style="border: 0px; border-bottom: 0.5px solid#00000030; margin-left: 20px; width: 500px; ">
                     <td>@Html.ValidationMessageFor(model => model.email)</td>
             </div>
             </tr>
             <tr>
                 <div style="display: flex; margin-left: 400px; padding: 30px 0px; ">
-                    <p style=" margin: 0px;">Nhập Tên Tài Khoản: </p>
+                    <p style=" margin: 0px;">Nhập Mật Khẩu Tài Khoản: </p>
                     <input id="pass" name="pass" type="password" value="" style="border: 0px; border-bottom: 0.5px solid#00000030; margin-left: 20px; width: 500px; ">
                 <td>@Html.ValidationMessageFor(model => model.pass)</td>
         </div>
         </tr>
         <tr>
             <div style="display: flex; margin-left: 400px; padding: 30px 0px; ">
-                <p style=" margin: 0px;">Nhập Mật Khẩu Tài Khoản: </p>
+                <p style=" margin: 0px;">Nhập Số Điện Thoài Tài Khoản: </p>
                 <input id="phone" name="phone" type="text" value="" style="border: 0px; border-bottom: 0.5px solid#00000030; margin-left: 20px; width: 500px; ">
             <td>@Html.ValidationMessageFor(model => model.phone)</td>
             @if (ViewBag.ErrorInfo == null)

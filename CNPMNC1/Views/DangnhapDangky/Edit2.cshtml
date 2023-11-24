@@ -42,10 +42,14 @@
         </div>
 
         <div class="form-group">
-            <p>Hệ thống cho phép phân loại khách hàng theo mức chi tiêu làm các loại: khách hàng kim cương, khách hàng vàng, khách hàng bạc và khách hàng đồng</p>
             @Html.LabelFor(model => model.thanhvien, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.thanhvien, new { htmlAttributes = new { @class = "form-control" } })
+                <select id="thanhvien" name="thanhvien" style="border: 0px; border-bottom: 0.5px solid #00000030; margin-left: 20px; width: 500px;">
+                    <option value="khách hàng kim cương">khách hàng kim cương</option>
+                    <option value="khách hàng vàng">khách hàng vàng</option>
+                    <option value="khách hàng bạc">khách hàng bạc</option>
+                    <option value="khách hàng đồng">khách hàng đồng</option>
+                </select>                
                 @Html.ValidationMessageFor(model => model.thanhvien, "", new { @class = "text-danger" })
             </div>
         </div>
